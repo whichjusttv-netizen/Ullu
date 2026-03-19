@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free Fire AI Pro</title>
+  <style>
+    body { font-family: Arial; background:#111; color:#fff; text-align:center; }
+    input, select { padding:10px; margin:5px; }
+    button { padding:10px; }
+    #chat { max-width:500px; margin:auto; }
+  </style>
+</head>
+<body>
+
+<h2>🔥 Free Fire AI (Pro)</h2>
+
+<!-- SETTINGS -->
+<div>
+  <input id="apiKey" placeholder="Enter API Key">
+  <select id="model">
+    <option value="model1">Model 1</option>
+    <option value="model2">Model 2</option>
+  </select>
+  <button onclick="saveSettings()">Save</button>
+</div>
+
+<hr>
+
+<!-- CHAT -->
+<div id="chat"></div>
+
+<input id="input" placeholder="Ask about Free Fire">
+<button onclick="send()">Send</button>
+
+<script>
+// Load saved settings
+document.getElementById("apiKey").value = localStorage.getItem("apiKey") || "";
+document.getElementById("model").value = localStorage.getItem("model") || "model1";
+
+function saveSettings() {
+  localStorage.setItem("apiKey", document.getElementById("apiKey").value);
+  localStorage.setItem("model", document.getElementById("model").value);
+  alert("Settings Saved!");
+}
+
+function isFreeFire(q) {
+  return q.toLowerCase().includes("free fire") || q.toLowerCase().includes("ff");
+}
+
+function send() {
+  let input = document.getElementById("input").value;
+  let chat = document.getElementById("chat");
+
+  chat.innerHTML += "<p>🧑: " + input + "</p>";
+
+  let reply;
+
+  if(isFreeFire(input)) {
+    reply = "Free Fire AI response based on your model: " + localStorage.getItem("model");
+  } else {
+    reply = "I don’t know about that. Ask only about Free Fire.";
+  }
+
+  chat.innerHTML += "<p>🤖: " + reply + "</p>";
+}
+</script>
+
+</body>
+</html>
